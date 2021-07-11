@@ -20,6 +20,15 @@
       "tags": [
         "Sample and hold"
       ]
+    },
+    {
+      "slug": "randomchordrecorder",
+      "name": "randomchordrecorder",
+      "description": "",
+      "tags": [
+        "Sequencer",
+        "Random"
+      ]
     }
   ]
 }
