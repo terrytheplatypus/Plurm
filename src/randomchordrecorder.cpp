@@ -81,7 +81,7 @@ struct Randomchordrecorder : Module {
 
 	int currSlot = 0;
 
-	int poly = 16;
+	int poly = 5;
 
 	int SLOT_NUM = 12;
 
@@ -98,9 +98,16 @@ struct Randomchordrecorder : Module {
 
 	//https://stackoverflow.com/a/19728404
 
-	std::random_device rd;     // only used once to initialise (seed) engine
+	std::mt19937 rng;
+
+	std::mt19937 getSeededTwister() {
+		std::random_device rd;     // only used once to initialise (seed) engine
+		std::mt19937 twister(rd());    // random-number engine used (Mersenne-Twister in this case)
+		return twister;
+	}
 
 	Randomchordrecorder() {
+		rng = getSeededTwister();
 		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
 		// configParam(WEIGHT1_PARAM, 0.f, 1.f, 0.f, "");
 		for(int n=0; n < SLOT_NUM; n++) {
@@ -120,12 +127,12 @@ struct Randomchordrecorder : Module {
 		for(int n = 0; n < SLOT_NUM; n++) {
 			clearChord(n);
 		}
-		// for(int n = 0; n < NUM_LIGHTS; n++) {
-		// 	lights[n*3].value = 0;
-		// 	lights[n*3+1].value = 0;
-		// 	lights[n*3+2].value = 0;
-				
-		// }
+	}
+
+	void onReset() override {
+		for(int n = 0; n < SLOT_NUM; n++) {
+			clearChord(n);
+		}
 	}
 
 	int getLength() {
@@ -163,7 +170,7 @@ struct Randomchordrecorder : Module {
 		// currSlot = currSlot<getLength()-1?currSlot+1:0;
 		int currIndex = currSlot;
 		for(int n=0;n<getLength()-1;n++) {
-			currIndex<getLength()-1?currIndex+1:0;
+			currIndex = (currIndex<getLength()-1)?currIndex+1:0;
 			if(!chords[currIndex].occupied) {
 				currSlot = currIndex;
 				break;
@@ -189,7 +196,7 @@ struct Randomchordrecorder : Module {
 		lightTimer = (lightTimer + 1) % ( (int) args.sampleRate);
 		gateTimer = (gateTimer + 1) % ( (int) args.sampleRate);
 
-		std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+		
 
 		// if(chords[currSlot].occupied) {
 			int inChannels = inputs[GATEIN_INPUT].getChannels();
@@ -226,7 +233,7 @@ struct Randomchordrecorder : Module {
 				recState = NOT_REC;
 				//go to the next empty slot because it's natural to record to the next empty slot,
 				//it would be unnatural to go to an occupied slot though
-				// nextEmptySlot();
+				nextEmptySlot();
 			}
 
 		
@@ -237,29 +244,23 @@ struct Randomchordrecorder : Module {
 		//the user is responsible for how they want to manage the gates
 		//user input overrides the playback
 		
+		if(gateTimer>10) initialPlayback = false;
+		
+		bool gateOn = (gateTimer>10 || !initialPlayback);
 		if(recState == STARTED_REC) {
 			//user input
-			// if(initialPlayback) { 
-			// 	resetGates(); 
-			// 	initialPlayback = false;
-			// 	cout << "eoeur" << endl;
-			// } else {
-
-				if(gateTimer>10) initialPlayback = false;
-				
 				for(int n = 0; n < poly; n++) {
 					outputs[CVOUT_OUTPUT].setVoltage(tempNotes[n], n);
 					//the 10 sample latency is necessary to shut the gate on and off
 					//a bit hacky, but seemed unavoidable
 					//at 44100 hz that's .25 ms which is negligible
 					outputs[GATEOUT_OUTPUT].setVoltage(
-						tempGates[n]*10*(gateTimer>10 || !initialPlayback), n);
+						tempGates[n]*10*gateOn, n);
 				}
-			// }
 		} else {
 			for(int n = 0; n < poly; n++) {
 				outputs[CVOUT_OUTPUT].setVoltage(chords[currSlot].notes[n], n);
-				outputs[GATEOUT_OUTPUT].setVoltage(chords[currSlot].gates[n]*10, n);
+				outputs[GATEOUT_OUTPUT].setVoltage(chords[currSlot].gates[n]*10*gateOn, n);
 			}
 		}
 
@@ -301,15 +302,9 @@ struct Randomchordrecorder : Module {
 				} else weights.push_back(1);
 			}
 
-			cout<< "WEIGHTS:"<<endl;
-			for(int i=0; i < weights.size(); i++)
-   				std::cout << weights.at(i) << ' '<<endl;
-
-			cout<< "OCC SLOTS:"<<endl;
-			for(int i=0; i < occupiedSlots.size(); i++)
-   				std::cout << occupiedSlots.at(i) << ' '<<endl;
-
-			if(inputs[FREEZE_INPUT].getVoltage() < gateHigh && getLength() > 1) {
+			if(	occupiedSlots.size()>1 &&
+				inputs[FREEZE_INPUT].getVoltage() < gateHigh && 
+				getLength() > 1) {
 				//this allows repetitions
 				std::discrete_distribution<> d(weights.begin(), weights.end());
 				currSlot = occupiedSlots[d(rng)];
@@ -370,48 +365,98 @@ struct Randomchordrecorder : Module {
 						lights[i*3+2].value = .8;
 					}
 				}
-				else if(i >= getLength()) {
-					lights[i*3].value = 0;
-					lights[i*3+1].value = 0;
-					lights[i*3+2].value = 0;
-				}
+			}
+			else if(i >= getLength()) {
+				lights[i*3].value = 0;
+				lights[i*3+1].value = 0;
+				lights[i*3+2].value = 0;
 			}
         }
-
-
-		
-
-		//json should save current slots
-
-
-		//so there's 
-
-		//if edit button is currently active, record on that slot
-		//recording is like this: start recording when one gate is highs,
-		// record in all available channels until all gates are low
-		//editing will erase all channels and record in that slot
-		//trigger will jump to a random chord based on weights
-		//all gates will be output
-		//if freeze is active, trigger will just retrigger the last selected chord
-		
-		//maybe have right-click menu option on whether click should trigger chord to be played or not,
-		//or it could only be played on double-click
 
 		//could have rightclick menu for polyphony channels
 		
 	}
 
+	//chords and weights should be saved and loaded
 	//get json save/load working after you get chord recording working
-	// json_t *dataToJson() override {
-	// 	json_t *rootJ = json_object();
-	// }
+	json_t *dataToJson() override {
+		json_t *rootJ = json_object();
+		json_t *chordsJ = json_object();
+		//each chord should be a json object with occupied flag, notes array, and
+		//gates array
+		for(int n = 0; n < SLOT_NUM; n++) {
+			json_t *chordJ = json_object();
 
-	// void dataFromJson(json_t *rootJ) override {
-	// }
+			json_object_set_new(chordJ, "occupied", 
+						json_boolean(chords[n].occupied));
+			json_t *notesJ = json_array();
+			json_t *gatesJ = json_array();
+			for(int m = 0; m < 16; m++) {
+				json_t *gateJ = json_boolean(chords[n].gates[m]);
+				json_t *noteJ = json_real((double) chords[n].notes[m]);
+				json_array_append_new(notesJ, noteJ);
+				json_array_append_new(gatesJ, gateJ);
+			}
+			json_object_set_new(chordJ, "notes", notesJ);
+			json_object_set_new(chordJ, "gates", gatesJ);
+
+			json_object_set_new(chordsJ, ("chord" + to_string(n)).c_str(), chordJ);
+
+		}
+
+		json_object_set_new(rootJ, "chords", chordsJ);
+
+		return rootJ;
+	}
+
+	void dataFromJson(json_t *rootJ) override {
+		// json_t *lengthJ = json_object_get(rootJ, "length");
+		json_t *chordsJ = json_object_get(rootJ, "chords");
+		if(chordsJ) {
+			for(int n = 0; n < SLOT_NUM; n++) {
+				json_t *chordJ = json_object_get(chordsJ, ("chord" + to_string(n)).c_str());
+				if(chordJ) {
+					json_t *occupied = json_object_get(chordJ, "occupied");
+					if(occupied) {
+						chords[n].occupied = json_is_true(occupied);
+					}
+					json_t *notesJ = json_object_get(chordJ, "notes");
+					json_t *gatesJ = json_object_get(chordJ, "gates");
+					if(notesJ) {
+						for(int m = 0; m < 16; m++) {
+							json_t *noteJ = json_array_get(notesJ, m);
+							if(noteJ) {
+								chords[n].notes[m] = json_real_value(noteJ);
+							}
+						}
+					}
+					if(gatesJ) {
+						for(int m = 0; m < 16; m++) {
+							json_t *gateJ = json_array_get(gatesJ, m);
+							if(gateJ) {
+								chords[n].gates[m] = json_is_true(gateJ);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+
 };
 
+template <class T> class MenuOption {
+	public: 
+		std::string name;
+		T value;
+		MenuOption(std::string _name, T _value) : name(_name), value(_value) {}
+};
 
 struct RandomchordrecorderWidget : ModuleWidget {
+	
+	std::vector<MenuOption<int>> polyOptions;
+
 	RandomchordrecorderWidget(Randomchordrecorder* module) {
 		setModule(module);
 		setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/randomchordrecorder.svg")));
@@ -470,6 +515,52 @@ struct RandomchordrecorderWidget : ModuleWidget {
 		addChild(createLightCentered<MediumLight<RedGreenBlueLight>>(mm2px(Vec(57.23, 65.235)), module, Randomchordrecorder::ACTIVE10_LIGHT));
 		addChild(createLightCentered<MediumLight<RedGreenBlueLight>>(mm2px(Vec(86.206, 65.557)), module, Randomchordrecorder::ACTIVE12_LIGHT));
 		addChild(createLightCentered<MediumLight<RedGreenBlueLight>>(mm2px(Vec(72.087, 65.645)), module, Randomchordrecorder::ACTIVE11_LIGHT));
+
+		// polyOptions.emplace_back(std::string("Lower"), 12);
+		// polyOptions.emplace_back(std::string("Repeat"), 24);
+		// offsetOptions.emplace_back(std::string("Upper"), 36);
+		// offsetOptions.emplace_back(std::string("Random"), 0);
+
+		for(int n = 1; n <17; n++) {
+			polyOptions.emplace_back(to_string(n), n);
+		}
+	
+	}
+
+	void appendContextMenu(Menu *menu) override {
+		Randomchordrecorder *recorder = dynamic_cast<Randomchordrecorder*>(module);
+		assert(recorder);
+
+		struct RecorderMenu : MenuItem {
+			Randomchordrecorder *module;
+			RandomchordrecorderWidget *parent;
+		};
+
+		struct PolyphonyItem : RecorderMenu {
+			int numPoly;
+			void onAction(const rack::event::Action &e) override {
+				module->poly = numPoly;
+			}
+		};
+
+		struct PolyphonyMenu : RecorderMenu {
+			Menu *createChildMenu() override {
+				Menu *menu = new Menu;
+				for (auto opt: parent->polyOptions) {
+					PolyphonyItem *item = createMenuItem<PolyphonyItem>(opt.name, CHECKMARK(module->poly == opt.value));
+					item->module = module;
+					item->numPoly = opt.value;
+					menu->addChild(item);
+				}
+				return menu;
+			}
+		};
+
+		menu->addChild(construct<MenuLabel>());
+		PolyphonyMenu *polyphonyItem = createMenuItem<PolyphonyMenu>("Polyphony Channels");
+		polyphonyItem->module = recorder;
+		polyphonyItem->parent = this;
+		menu->addChild(polyphonyItem);
 	}
 };
 
