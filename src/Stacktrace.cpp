@@ -66,7 +66,7 @@ struct Stacktrace : Module {
         //iterate through lights and turn on the ones that are in the stack
 
         //i don't understand why this has to be 1-indexed but ok
-        for (int i = 1; i < NUM_LIGHTS; i++) {
+        for (size_t i = 1; i < NUM_LIGHTS; i++) {
             lights[i].setBrightness(i < stak.size()+1 ? 1.f : 0.f);
         }
     }

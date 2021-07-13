@@ -295,7 +295,7 @@ struct Randomchordrecorder : Module {
 					tempWeights.push_back(params[n].getValue());
 				}
 			}
-			for(int n =0; n < occupiedSlots.size(); n++) {
+			for(size_t n =0; n < occupiedSlots.size(); n++) {
 				//if all weights are set to 0, make it uniform
 				if(totalWeight != 0) {
 					weights.push_back(tempWeights[n]/totalWeight);
