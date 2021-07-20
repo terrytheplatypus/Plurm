@@ -1,5 +1,8 @@
 #include "plugin.hpp"
 #include <random>
+#ifdef ARCH_WIN
+#include <ctime>
+#endif
 
 using namespace std;
 
@@ -101,8 +104,12 @@ struct Randomchordrecorder : Module {
 	std::mt19937 rng;
 
 	std::mt19937 getSeededTwister() {
-		std::random_device rd;     // only used once to initialise (seed) engine
-		std::mt19937 twister(rd());    // random-number engine used (Mersenne-Twister in this case)
+		#ifdef ARCH_WIN
+			std::mt19937 twister(time(0));
+		#else
+			std::random_device rd;     // only used once to initialise (seed) engine
+			std::mt19937 twister(rd());    // random-number engine used (Mersenne-Twister in this case)
+		#endif
 		return twister;
 	}
 
