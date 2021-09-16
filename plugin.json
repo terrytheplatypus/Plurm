@@ -29,6 +29,14 @@
         "Sequencer",
         "Random"
       ]
+    },
+    {
+      "slug": "randomchordexpndr",
+      "name": "randomchordexpndr",
+      "description": "an expander for randomchordrecorder",
+      "tags": [
+        "Expander"
+      ]
     }
   ]
 }
