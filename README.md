@@ -14,3 +14,5 @@ A polyphonic sequencer which allows the user to directly record chords which wil
 RECORDING: When an LED under a slot is red, you can record to that slot by having input into the poly cv and gate inputs. the recording will begin when any gate becomes high and ends when all gates are low. while editing, the notes you play will come out of the cv and gate output.
 
 ADDITIONAL: the number of output polyphony channels can be configured in the right-click menu. The default is 5 channels.
+
+randomchordexpndr: an expander for randomchordrecorder. currently there is one output for the current slot/sequence number (0 through 11 volts output). The intent for this is to control other sequencers with the output of this one, to play certain melodies for each chord.
