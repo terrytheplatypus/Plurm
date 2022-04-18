@@ -93,7 +93,7 @@ struct RandomchordrecorderWidget : ModuleWidget {
 		struct PolyphonyItem : RecorderMenu {
 			int numPoly;
 			void onAction(const rack::event::Action &e) override {
-				module->poly = numPoly;
+				module->numPolyChannels = numPoly;
 			}
 		};
 
@@ -101,7 +101,7 @@ struct RandomchordrecorderWidget : ModuleWidget {
 			Menu *createChildMenu() override {
 				Menu *menu = new Menu;
 				for (auto opt: parent->polyOptions) {
-					PolyphonyItem *item = createMenuItem<PolyphonyItem>(opt.name, CHECKMARK(module->poly == opt.value));
+					PolyphonyItem *item = createMenuItem<PolyphonyItem>(opt.name, CHECKMARK(module->numPolyChannels == opt.value));
 					item->module = module;
 					item->numPoly = opt.value;
 					menu->addChild(item);

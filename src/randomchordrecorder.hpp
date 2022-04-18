@@ -86,7 +86,7 @@ struct Randomchordrecorder : Module {
 
 	int currSlot = 0;
 
-	int poly = 5;
+	int numPolyChannels = 5;
 
 	int SLOT_NUM = 12;
 
@@ -128,8 +128,8 @@ struct Randomchordrecorder : Module {
 		//length param should be discrete, from 1 to 12
 		// configParam(LENGTH_PARAM, 0.f, 1.f, 0.f, "");
 		configParam(LENGTH_PARAM, 1.0, (double) SLOT_NUM , (double) SLOT_NUM, "length");
-		outputs[CVOUT_OUTPUT].setChannels(poly);
-		outputs[GATEOUT_OUTPUT].setChannels(poly);
+		outputs[CVOUT_OUTPUT].setChannels(numPolyChannels);
+		outputs[GATEOUT_OUTPUT].setChannels(numPolyChannels);
 		//just init temp chord arrays
 		clearTempChord();
 
@@ -149,7 +149,7 @@ struct Randomchordrecorder : Module {
 	}
 
 	void clearChord(int index) {
-		for(int n = 0; n < poly; n++) {
+		for(int n = 0; n < numPolyChannels; n++) {
 			chords[index].gates[n] = false;
 			chords[index].notes[n] = 0;
 		}
@@ -161,7 +161,7 @@ struct Randomchordrecorder : Module {
 	}
 
 	void copyCurrChord() {
-		for(int n = 0; n < poly; n++) {
+		for(int n = 0; n < numPolyChannels; n++) {
 			chords[currSlot].gates[n] = tempGates[n];
 			chords[currSlot].notes[n] = tempNotes[n];
 		}
@@ -169,7 +169,7 @@ struct Randomchordrecorder : Module {
 	}
 
 	void clearTempChord() {
-		for(int n = 0; n < poly; n++) {
+		for(int n = 0; n < numPolyChannels; n++) {
 			tempGates[n] = false;
 			tempNotes[n] = 0;
 		}
@@ -188,7 +188,7 @@ struct Randomchordrecorder : Module {
 	}
 
 	void resetGates() {
-		for(int n = 0; n < poly; n++) {
+		for(int n = 0; n < numPolyChannels; n++) {
 			outputs[GATEOUT_OUTPUT].setVoltage(0, n);
 		}
 		gateTimer = 0;
@@ -198,8 +198,8 @@ struct Randomchordrecorder : Module {
 	void process(const ProcessArgs& args) override {
 
 		
-		outputs[CVOUT_OUTPUT].setChannels(poly);
-		outputs[GATEOUT_OUTPUT].setChannels(poly);
+		outputs[CVOUT_OUTPUT].setChannels(numPolyChannels);
+		outputs[GATEOUT_OUTPUT].setChannels(numPolyChannels);
 
 		//timers are used for blinking light and gate reset
 		lightTimer = (lightTimer + 1) % ( (int) args.sampleRate);
@@ -258,7 +258,7 @@ struct Randomchordrecorder : Module {
 		bool gateOn = (gateTimer>10 || !initialPlayback);
 		if(recState == STARTED_REC) {
 			//user input
-				for(int n = 0; n < poly; n++) {
+				for(int n = 0; n < numPolyChannels; n++) {
 					outputs[CVOUT_OUTPUT].setVoltage(tempNotes[n], n);
 					//the 10 sample latency is necessary to shut the gate on and off
 					//a bit hacky, but seemed unavoidable
@@ -267,7 +267,7 @@ struct Randomchordrecorder : Module {
 						tempGates[n]*10*gateOn, n);
 				}
 		} else {
-			for(int n = 0; n < poly; n++) {
+			for(int n = 0; n < numPolyChannels; n++) {
 				outputs[CVOUT_OUTPUT].setVoltage(chords[currSlot].notes[n], n);
 				outputs[GATEOUT_OUTPUT].setVoltage(chords[currSlot].gates[n]*10*gateOn, n);
 			}
@@ -393,6 +393,11 @@ struct Randomchordrecorder : Module {
 		json_t *chordsJ = json_object();
 		//each chord should be a json object with occupied flag, notes array, and
 		//gates array
+
+		//store num of polyphony channels
+		json_t *polyJ = json_integer(numPolyChannels);
+		json_object_set_new(rootJ, "numPolyChannels", polyJ);
+		
 		for(int n = 0; n < SLOT_NUM; n++) {
 			json_t *chordJ = json_object();
 
@@ -400,6 +405,7 @@ struct Randomchordrecorder : Module {
 						json_boolean(chords[n].occupied));
 			json_t *notesJ = json_array();
 			json_t *gatesJ = json_array();
+			
 			for(int m = 0; m < 16; m++) {
 				json_t *gateJ = json_boolean(chords[n].gates[m]);
 				json_t *noteJ = json_real((double) chords[n].notes[m]);
@@ -420,6 +426,12 @@ struct Randomchordrecorder : Module {
 
 	void dataFromJson(json_t *rootJ) override {
 		// json_t *lengthJ = json_object_get(rootJ, "length");
+
+		json_t *polyJ = json_object_get(rootJ, "numPolyChannels");
+		if(polyJ) {
+			numPolyChannels = json_integer_value(polyJ);
+		}
+
 		json_t *chordsJ = json_object_get(rootJ, "chords");
 		if(chordsJ) {
 			for(int n = 0; n < SLOT_NUM; n++) {
