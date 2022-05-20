@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="60.959999mm"
+   height="128.5mm"
+   viewBox="0 0 60.959999 128.5"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="chordscalequantizer.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4396184"
+     inkscape:cx="-23.270055"
+     inkscape:cy="229.57473"
+     inkscape:window-width="1482"
+     inkscape:window-height="1003"
+     inkscape:window-x="258"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs2">
+    <rect
+       x="19.449598"
+       y="363.29074"
+       width="76.409137"
+       height="45.150832"
+       id="rect72831" />
+    <rect
+       x="-173.65713"
+       y="188.24433"
+       width="106.97279"
+       height="114.61371"
+       id="rect70449" />
+    <rect
+       x="19.449598"
+       y="363.29074"
+       width="69.462852"
+       height="34.036776"
+       id="rect66057" />
+    <rect
+       x="29.869026"
+       y="167.40547"
+       width="68.420905"
+       height="25.353959"
+       id="rect30089" />
+    <rect
+       x="24.311998"
+       y="13.89257"
+       width="193.10673"
+       height="98.63725"
+       id="rect10315" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#d3c72c;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583"
+       id="rect31"
+       width="60.282177"
+       height="127.73205"
+       x="0.73514855"
+       y="0.91893566"
+       ry="5.1460395" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text66055"
+       style="font-size:16px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB';white-space:pre;shape-inside:url(#rect66057)"><tspan
+         x="19.449219"
+         y="378.23828"
+         id="tspan91126">me</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text70447"
+       style="font-size:16px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB';white-space:pre;shape-inside:url(#rect70449)" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text72829"
+       style="font-size:16px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB';white-space:pre;shape-inside:url(#rect72831)"><tspan
+         x="19.449219"
+         y="378.23828"
+         id="tspan91128">me</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Layer 2">
+    <rect
+       style="fill:#e8e095;fill-opacity:1;stroke-width:0.183167"
+       id="rect23071"
+       width="21.135519"
+       height="19.113861"
+       x="5.1460395"
+       y="96.120674"
+       ry="2.6424692" />
+    <rect
+       style="fill:#e8e095;fill-opacity:1;stroke-width:0.239689"
+       id="rect23071-4"
+       width="23.524752"
+       height="29.405939"
+       x="4.8703589"
+       y="57.98484"
+       ry="4.0653372"
+       inkscape:transform-center-x="-0.61368918"
+       inkscape:transform-center-y="9.1763199" />
+    <rect
+       style="fill:#36260c;fill-opacity:1;stroke-width:0.213276"
+       id="rect23071-4-8"
+       width="21.135519"
+       height="25.913984"
+       x="35.379025"
+       y="79.120361"
+       ry="3.5825784" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB';stroke-width:0.264583"
+       x="46.0112"
+       y="85.226814"
+       id="text76217-8"><tspan
+         sodipodi:role="line"
+         id="tspan76215-7"
+         style="text-align:center;text-anchor:middle;fill:#dddddd;fill-opacity:1;stroke-width:0.264583"
+         x="46.0112"
+         y="85.226814">quantized </tspan><tspan
+         sodipodi:role="line"
+         style="text-align:center;text-anchor:middle;fill:#dddddd;fill-opacity:1;stroke-width:0.264583"
+         x="46.0112"
+         y="90.518478"
+         id="tspan86632">melody</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="text">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-0.73514848,-0.18378713)"
+       id="text10313"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect10315);fill:#000000;fill-opacity:1;stroke:none"
+       x="84.671875"
+       y="0"><tspan
+         x="65.052734"
+         y="43.787097"
+         id="tspan91132"><tspan
+           style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB';text-align:center;text-anchor:middle"
+           id="tspan91130">chordscale
+</tspan></tspan><tspan
+         x="73.443359"
+         y="85.369117"
+         id="tspan91136"><tspan
+           style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB';text-align:center;text-anchor:middle"
+           id="tspan91134">quantizer</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-1.470297,16.173267)"
+       id="text30087"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB';white-space:pre;shape-inside:url(#rect30089);fill:#000000;fill-opacity:1;stroke:none"
+       x="30.0625"
+       y="0"><tspan
+         x="33.59082"
+         y="182.35351"
+         id="tspan91140"><tspan
+           style="text-align:center;text-anchor:middle"
+           id="tspan91138">chord v/oct</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB';stroke-width:0.264583"
+       x="8.4542074"
+       y="76.639236"
+       id="text61463"><tspan
+         sodipodi:role="line"
+         id="tspan61461"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="8.4542074"
+         y="76.639236">chord gate</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB';stroke-width:0.264583"
+       x="6.8001232"
+       y="101.4505"
+       id="text76217"><tspan
+         sodipodi:role="line"
+         id="tspan76215"
+         style="stroke-width:0.264583"
+         x="6.8001232"
+         y="101.4505">melody v/oct</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="components"
+     style="display:none">
+    <circle
+       style="fill:#00ff00;fill-opacity:1;stroke-width:0.239312"
+       id="CHORD_CV_IN"
+       cx="15.070375"
+       cy="69.103996"
+       r="3.3080001"
+       inkscape:label="CHORD_CV_IN" />
+    <circle
+       style="fill:#00ff00;fill-opacity:1;stroke-width:0.239312"
+       id="CHORD_GATE_IN"
+       cx="15.070544"
+       cy="81.785278"
+       r="3.3080001"
+       inkscape:label="CHORD_GATE_IN" />
+    <circle
+       style="fill:#00ff00;fill-opacity:1;stroke-width:0.239312"
+       id="MELODY_CV_IN"
+       cx="15.438119"
+       cy="108.06683"
+       r="3.3080001"
+       inkscape:label="MELODY_CV_IN" />
+    <circle
+       style="fill:#0000ff;fill-opacity:1;stroke-width:0.239312"
+       id="QUANTIZED_CV_OUT"
+       cx="45.579205"
+       cy="96.304459"
+       r="3.3080001"
+       inkscape:label="QUANTIZED_CV_OUT" />
+  </g>
+</svg>
