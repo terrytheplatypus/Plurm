@@ -37,6 +37,14 @@
       "tags": [
         "Expander"
       ]
+    },
+    {
+      "slug": "chordscalequantizer",
+      "name": "chordscalequantizer",
+      "description": "quantizes notes to a diatonic scale based on a chord",
+      "tags": [
+        "Quantizer"
+      ]
     }
   ]
 }
