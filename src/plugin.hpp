@@ -12,3 +12,4 @@ extern Plugin* pluginInstance;
 extern Model* modelStacktrace;
 extern Model* modelRandomchordrecorder;
 extern Model* modelRandomchordexpndr;
+extern Model* modelBoringfilter;
