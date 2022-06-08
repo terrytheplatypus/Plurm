@@ -2,6 +2,8 @@
 #include <math.h>
 #include <unordered_set>
 #include <unordered_map>
+#include <iostream>
+#include "external/catch.hpp"
 
 struct Chordscalequantizer : Module
 {
@@ -37,9 +39,9 @@ struct Chordscalequantizer : Module
 	const int B = 11;
 
 	// list of scales
-	int C_Scale [7] = {C, D, E, F, G, A, B};
+	int C_Scale[7] = {C, D, E, F, G, A, B};
 	int CS_Scale[7] = {CS, DS, F, FS, GS, AS, C};
-	int D_Scale [7] = {D, E, FS, G, A, B, CS};
+	int D_Scale[7] = {D, E, FS, G, A, B, CS};
 	int DS_Scale[7] = {DS, F, G, GS, AS, C, D};
 	int E_Scale[7] = {E, FS, GS, A, B, CS, DS};
 	int F_Scale[7] = {F, G, A, AS, C, D, E};
@@ -50,18 +52,18 @@ struct Chordscalequantizer : Module
 	int AS_Scale[7] = {AS, C, D, DS, F, G, A};
 	int B_Scale[7] = {B, CS, DS, E, FS, GS, AS};
 
-	int* allScales [12] = {C_Scale,
-						 CS_Scale,
-						 D_Scale,
-						 DS_Scale,
-						 E_Scale,
-						 F_Scale,
-						 FS_Scale,
-						 G_Scale,
-						 GS_Scale,
-						 A_Scale,
-						 AS_Scale,
-						 B_Scale};
+	int *allScales[12] = {C_Scale,
+						  CS_Scale,
+						  D_Scale,
+						  DS_Scale,
+						  E_Scale,
+						  F_Scale,
+						  FS_Scale,
+						  G_Scale,
+						  GS_Scale,
+						  A_Scale,
+						  AS_Scale,
+						  B_Scale};
 
 	// set to 0 to start with, which corresponds with C diatonic scale but this should be ok
 	int curScale = 0;
@@ -80,6 +82,9 @@ struct Chordscalequantizer : Module
 	enum OutputId
 	{
 		QUANTIZED_CV_OUTPUT,
+		ROOT_OUTPUT,
+		CHORD_CHANGE_OUTPUT,
+		SCALE_OUTPUT,
 		OUTPUTS_LEN
 	};
 	enum LightId
@@ -88,10 +93,11 @@ struct Chordscalequantizer : Module
 	};
 
 	std::unordered_set<int> chordSet;
-	//std::uniform_real_distribution<> dis = std::uniform_real_distribution<>(0.0, 1.0);
+	// std::uniform_real_distribution<> dis = std::uniform_real_distribution<>(0.0, 1.0);
 	int currNotes[16];
 	bool currGates[16];
 	int currScale = 0;
+	long timer = 0;
 	// behavior could be that until you play a chord into the chord input,
 	// it doesnt quantize anything
 	bool seeded = false;
@@ -107,10 +113,10 @@ struct Chordscalequantizer : Module
 
 	void process(const ProcessArgs &args) override
 	{
-
-		int inChannels = inputs[CHORD_GATE_INPUT].getChannels();
+		timer++;
+		int chordInChannels = inputs[CHORD_GATE_INPUT].getChannels();
 		bool notesChanged = false;
-		for (int i = 0; i < inChannels; i++)
+		for (int i = 0; i < chordInChannels; i++)
 		{
 			int prevNote = currNotes[i];
 			if (inputs[CHORD_GATE_INPUT].getVoltage(i) > gateHigh)
@@ -122,6 +128,10 @@ struct Chordscalequantizer : Module
 				if (prevNote != newNote)
 				{
 					currNotes[i] = newNote;
+					// you should only be erasing prevnote if it is not one of the current
+					// input notes
+					// instead of doing this complicated shit you could clear the whole set
+					// and insert all the new notes, which is what you actually need to do
 					chordSet.erase(prevNote);
 
 					chordSet.insert(newNote);
@@ -148,7 +158,8 @@ struct Chordscalequantizer : Module
 
 		if (notesChanged)
 		{
-			//the scores for each scale
+			// maybe put this into a separate func so you can unit test
+			// the scores for each scale
 			int scores[12];
 			// loop over scales and use set to cut down on verbose code for now
 			for (int i = 0; i < 12; i++)
@@ -183,7 +194,7 @@ struct Chordscalequantizer : Module
 			// int[13][12] scoreOccurrences;
 			// vector<vector<int>> scoreOccurrences;
 
-			//mapping each possible score to all the scales corresponding to it
+			// mapping each possible score to all the scales corresponding to it
 			std::unordered_map<int, std::vector<int>> scoreMap;
 
 			int max = INT_MIN;
@@ -198,21 +209,30 @@ struct Chordscalequantizer : Module
 				}
 			}
 
-			//pick randomly between ties
+			// pick randomly between ties
 			std::vector<int> maxScores = scoreMap.at(max);
 
 			std::uniform_int_distribution<> dis(0, maxScores.size() - 1);
 			currScale = maxScores[dis(rng)];
+		}
 
-			// std::vector<int> out;
-			// std::sample(
-			// 	scores[max].begin(),
-			// 	scores[max].end(),
-			// 	std::back_inserter(out),
-			// 	1,
-			// 	rng);
+		/*SETTING OUTPUT*/
 
-			// currScale = out[0];
+		int melodyInChannels = inputs[MELODY_CV_INPUT].getChannels();
+		// set output channel number to input channel number
+		outputs[QUANTIZED_CV_OUTPUT].setChannels(melodyInChannels);
+		for (int i = 0; i < outputs[QUANTIZED_CV_OUTPUT].getChannels(); i++)
+		{
+			float in = inputs[MELODY_CV_INPUT].getVoltage(i);
+			bool debug = (timer % 44100 == 0);
+			outputs[QUANTIZED_CV_OUTPUT].setVoltage(naiveQuantizer(in, allScales[currScale], debug), i);
+		}
+		outputs[ROOT_OUTPUT].setVoltage(scaleToVolt(allScales[currScale][0]), 0);
+		outputs[CHORD_CHANGE_OUTPUT].setVoltage(notesChanged ? 10 : 0, 0);
+		outputs[SCALE_OUTPUT].setChannels(7);
+		for (int i = 0; i < 7; i++)
+		{
+			outputs[SCALE_OUTPUT].setVoltage(scaleToVolt(allScales[currScale][i]), i);
 		}
 
 		// potential features: add avoid notes, or probability to hit avoid notes
@@ -224,6 +244,11 @@ struct Chordscalequantizer : Module
 		// the chord tones
 	}
 
+	float scaleToVolt(int note)
+	{
+		return ((float)note) / 12.0;
+	}
+
 	int quantizeForChord(float in)
 	{
 		float whole, frac;
@@ -233,28 +258,48 @@ struct Chordscalequantizer : Module
 
 	// this is naive quantizer impl, which does linear search for closest note
 	// use to prototype but really should optimize for performance
-	//would have to understand vcv quantizer implementation to optimize
-	double naiveQuantizer(float in, int scale [])
+	// would have to understand vcv quantizer implementation to optimize
+	// i was unit testing this in ideone cuz i dont know how to unit test here lol
+	double naiveQuantizer(float in, int scale[], bool debug)
 	{
+
 		float oct, note;
 		note = std::modf(in, &oct);
-		int closestDistance = 100;
+		// this needs to be a float otherwise it'll round to 0
+		float closestDistance = 100.0;
 		int closestIdx = -1;
-		for(int n = 0; n < sizeof(scale); n++) {
-			if(std::abs(note - scale[n]) < closestDistance) {
+		for (int n = 0; n < 7; n++)
+		{
+			float scalenote = ((float)scale[n]) / 12.0;
+			if (std::abs(note - scalenote) < closestDistance)
+			{
 				closestIdx = n;
-				closestDistance = std::abs(note - scale[n]);
+				closestDistance = std::abs(note - scalenote);
 			}
 		}
-		return closestIdx + oct;
-
+		float out = scaleToVolt(scale[closestIdx]) + oct;
+		if (debug)
+		{
+			std::cout << "in volt was " << in << " and out volt was " << out << std::endl;
+		}
+		// std::cout << "what the fuck" << std::endl;
+		return out;
 	}
 
-	bool contains(std::unordered_set <int> set, int x) {
+	// TODO:unit testing in cpp sux but i should figure it out
+	// TEST_CASE( "quantize expected shit", "[naiveQuantizerTest]" ) {
+	// int
+	//}
+
+	bool contains(std::unordered_set<int> set, int x)
+	{
 		auto search = set.find(x);
-		if (search != set.end()) {
+		if (search != set.end())
+		{
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	}
@@ -277,6 +322,10 @@ struct ChordscalequantizerWidget : ModuleWidget
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(15.438, 108.067)), module, Chordscalequantizer::MELODY_CV_INPUT));
 
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(45.579, 96.304)), module, Chordscalequantizer::QUANTIZED_CV_OUTPUT));
+
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(45.579, 110.304)), module, Chordscalequantizer::ROOT_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(45.579, 72.304)), module, Chordscalequantizer::CHORD_CHANGE_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(45.579, 52.304)), module, Chordscalequantizer::SCALE_OUTPUT));
 	}
 };
 
