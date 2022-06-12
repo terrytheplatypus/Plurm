@@ -286,7 +286,7 @@ struct Chordscalequantizer : Module
 		return out;
 	}
 
-	// TODO:unit testing in cpp sux but i should figure it out
+	// TODO: dunno how to do unit testing in cpp but i should figure it out
 	// TEST_CASE( "quantize expected shit", "[naiveQuantizerTest]" ) {
 	// int
 	//}

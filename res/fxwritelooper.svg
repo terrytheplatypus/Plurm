@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="212.8mm"
+   height="128.5mm"
+   viewBox="0 0 212.80001 128.5"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="fxwritelooper.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     height="128.5mm"
+     inkscape:zoom="0.7198092"
+     inkscape:cx="368.84774"
+     inkscape:cy="330.64317"
+     inkscape:window-width="1628"
+     inkscape:window-height="1030"
+     inkscape:window-x="183"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer3"
+     showguides="false" />
+  <defs
+     id="defs2">
+    <rect
+       x="475.12591"
+       y="225.05964"
+       width="127.81165"
+       height="43.066968"
+       id="rect116273" />
+    <rect
+       x="254.23404"
+       y="223.67038"
+       width="102.80502"
+       height="40.288454"
+       id="rect98913" />
+    <rect
+       x="34.731426"
+       y="218.11335"
+       width="118.08685"
+       height="58.348796"
+       id="rect95263" />
+    <rect
+       x="516.71772"
+       y="363.47064"
+       width="242.64121"
+       height="61.888243"
+       id="rect52217" />
+    <rect
+       x="209.77781"
+       y="330.64317"
+       width="130.59016"
+       height="61.12731"
+       id="rect48447" />
+    <rect
+       x="700.18555"
+       y="369.54237"
+       width="144.48273"
+       height="55.570281"
+       id="rect41243" />
+    <rect
+       x="712.68886"
+       y="361.20683"
+       width="55.570281"
+       height="45.845482"
+       id="rect32007" />
+    <rect
+       x="34.731426"
+       y="363.98534"
+       width="65.295081"
+       height="73.630623"
+       id="rect24497" />
+    <rect
+       x="95.858734"
+       y="16.671083"
+       width="276.46216"
+       height="43.066967"
+       id="rect7201" />
+    <linearGradient
+       id="linearGradient1215"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#00ff65;stop-opacity:1;"
+         offset="0"
+         id="stop1213" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#df5820;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583"
+       id="rect31"
+       width="122.03465"
+       height="129.01855"
+       x="0.73514855"
+       y="0.36757427"
+       ry="11.762376" />
+    <rect
+       style="fill:#df5820;fill-opacity:1;fill-rule:evenodd;stroke-width:0.285865"
+       id="rect11661"
+       width="212.8255"
+       height="128.65097"
+       x="0.73514855"
+       y="0.36757427"
+       ry="11.762376" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Layer 3">
+    <rect
+       style="fill:#f29d9d;fill-opacity:1;stroke-width:0.295588"
+       id="rect16483"
+       width="113.89333"
+       height="47.860126"
+       x="50.665287"
+       y="76.999153"
+       rx="6.9553246"
+       ry="13.528839" />
+    <rect
+       style="fill:#4a4f38;fill-opacity:1;stroke-width:0.32923"
+       id="rect18025"
+       width="39.439419"
+       height="48.084137"
+       x="167.48346"
+       y="77.480568"
+       rx="6.8296914"
+       ry="15.398934" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,0.25991425,0.5198285)"
+       id="text52215"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect52217);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="516.7168"
+         y="392.79244"
+         id="tspan117788"><tspan
+           style="font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE'"
+           id="tspan117786">return</tspan></tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2">
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke-width:0.318418"
+       id="rect1674"
+       width="131.49583"
+       height="34.184402"
+       x="76.918777"
+       y="19.113863"
+       ry="17.092201"
+       rx="6.3884616" />
+    <rect
+       style="fill:#f3e4a5;fill-opacity:1;stroke-width:0.327628"
+       id="rect11808"
+       width="38.889618"
+       height="42.271038"
+       x="6.6895857"
+       y="80.866333"
+       rx="6.7634187"
+       ry="17.09219" />
+    <rect
+       style="fill:#adeda9;fill-opacity:1;stroke-width:0.264583"
+       id="rect11808-1"
+       width="25.362623"
+       height="42.271038"
+       x="79.128006"
+       y="79.614059"
+       rx="4.4108953"
+       ry="17.09219" />
+    <rect
+       style="fill:#41bf19;fill-opacity:1;stroke-width:0.253945"
+       id="rect11808-7"
+       width="23.803137"
+       height="41.491295"
+       x="109.76742"
+       y="78.889267"
+       rx="4.1396804"
+       ry="16.776903" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="text">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1.25;font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="79.028465"
+       y="13.048886"
+       id="text8197"><tspan
+         sodipodi:role="line"
+         id="tspan8195"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE';stroke-width:0.264583"
+         x="79.028465"
+         y="13.048886">fxwritelooper</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,5.4320766,0.609017)"
+       id="text24495"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect24497);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="34.730469"
+         y="393.30611"
+         id="tspan117792"><tspan
+           style="font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE'"
+           id="tspan117790">in</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text32005"
+       style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;white-space:pre;shape-inside:url(#rect32007)" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,4.0694395,-2.2423887)"
+       id="text41241"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect41243);fill:#eaeaea;fill-opacity:1;stroke:none"><tspan
+         x="700.18555"
+         y="398.86471"
+         id="tspan117796"><tspan
+           style="font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE'"
+           id="tspan117794">out</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,0.2414427,8.9816876)"
+       id="text48445"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect48447);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="209.77734"
+         y="359.96432"
+         id="tspan117800"><tspan
+           style="font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE'"
+           id="tspan117798">send</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,1.1027228,-35.654703)"
+       id="text95261"
+       style="font-size:32px;line-height:1.25;font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE';white-space:pre;shape-inside:url(#rect95263)"><tspan
+         x="34.730469"
+         y="247.43502"
+         id="tspan117802">rec in</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-57.341584,-14.70297)"
+       id="text98911"
+       style="font-size:32px;line-height:1.25;font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE';white-space:pre;shape-inside:url(#rect98913)"><tspan
+         x="254.23438"
+         y="252.99166"
+         id="tspan117804">rec fx</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-112.47772,4.4108911)"
+       id="text116271"
+       style="font-size:32px;line-height:1.25;font-family:'AR DESTINE';-inkscape-font-specification:'AR DESTINE';white-space:pre;shape-inside:url(#rect116273)"><tspan
+         x="475.125"
+         y="254.38229"
+         id="tspan117806">erase</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="components">
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text7199"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect7201);fill:#000000;fill-opacity:1;stroke:none" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.256835"
+       id="REC_BUTTON"
+       cx="48.057564"
+       cy="27.681068"
+       r="9.0054998"
+       inkscape:label="REC_BUTTON" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.246839"
+       id="REC_FX_BUTTON"
+       cx="47.322464"
+       cy="49.368027"
+       r="8.6379995"
+       inkscape:label="REC_FX_BUTTON" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.251008"
+       id="ERASE_BUTTON"
+       cx="46.954983"
+       cy="69.21711"
+       r="8.2705002"
+       inkscape:label="ERASE_BUTTON" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="IN_LEFT"
+       cx="31.611387"
+       cy="91.342201"
+       r="5.5139999" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="IN_RIGHT"
+       cx="31.978964"
+       cy="113.21289"
+       r="5.5139999" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="SEND_LEFT"
+       cx="92.912048"
+       cy="91.19265"
+       r="5.5139999" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="REC_CV"
+       cx="65.795792"
+       cy="27.200493"
+       r="5.5139999"
+       inkscape:label="REC_CV" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="REC_FX_CV"
+       cx="64.693069"
+       cy="50.357681"
+       r="5.5139999"
+       inkscape:label="REC_FX_CV" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="ERASE_CV"
+       cx="65.428215"
+       cy="69.471535"
+       r="5.5139999" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="SEND_RIGHT"
+       cx="92.176895"
+       cy="110.49028"
+       r="5.5139999" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="RETURN_LEFT"
+       cx="122.09231"
+       cy="91.531395"
+       r="5.5139999" />
+    <ellipse
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="RETURN_RIGHT"
+       cx="121.90853"
+       cy="111.19661"
+       rx="5.5139999"
+       ry="5.5136137" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="OUT_LEFT"
+       cx="179.37622"
+       cy="93.363861"
+       r="5.5139999" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       id="OUT_RIGHT"
+       cx="178.64108"
+       cy="112.66149"
+       r="5.5139999" />
+  </g>
+</svg>
