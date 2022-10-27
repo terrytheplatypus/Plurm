@@ -16,3 +16,7 @@ RECORDING: When an LED under a slot is red, you can record to that slot by havin
 ADDITIONAL: the number of output polyphony channels can be configured in the right-click menu. The default is 5 channels.
 
 randomchordexpndr: an expander for randomchordrecorder. currently there is one output for the current slot/sequence number (0 through 11 volts output). The intent for this is to control other sequencers with the output of this one, to play certain melodies for each chord.
+
+simplerouter: Simple concept, base input goes into the "in" input. effect A recieves audio from send1 and recieves from ret1. effect B recieves audio from send2 and recieves from ret2. the switch switches the order in which effects A and B process audio, in the initial state (with light off) effect A is first, in the "on" state (with light on), effect B is first.
+
+chordscalequantizer: the intent of this module is to play a chord into the chord input the chord is used to pick a scale that matches its notes, and the scale is used to quantize incoming cv. this module does not function fully as intended, but i thought i might as well release a somewhat incomplete module rather than hold onto it forever.
