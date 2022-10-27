@@ -45,6 +45,15 @@
       "tags": [
         "Quantizer"
       ]
+    },
+    {
+      "slug": "simplerouter",
+      "name": "simplerouter",
+      "description": "a rpre/post-processing switch",
+      "tags": [
+        "Switch",
+        "Utility"
+      ]
     }
   ]
 }

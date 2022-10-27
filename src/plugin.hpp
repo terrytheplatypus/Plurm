@@ -13,3 +13,4 @@ extern Model* modelStacktrace;
 extern Model* modelRandomchordrecorder;
 extern Model* modelRandomchordexpndr;
 extern Model* modelChordscalequantizer;
+extern Model* modelSimplerouter;
