@@ -52,7 +52,8 @@
       "description": "a rpre/post-processing switch",
       "tags": [
         "Switch",
-        "Utility"
+        "Utility",
+        "Polyphonic"
       ]
     }
   ]

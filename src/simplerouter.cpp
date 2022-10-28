@@ -19,6 +19,7 @@ struct Simplerouter : Module {
 		OUTPUTS_LEN
 	};
 	enum LightId {
+		SWITCH_LIGHT,
 		LIGHTS_LEN
 	};
 
@@ -45,17 +46,23 @@ struct Simplerouter : Module {
 		*/
 
 		int numChannels = inputs[IN_INPUT].getChannels();
-			int switchVal = params[SWITCH_PARAM].getValue();
+		outputs[SEND1_OUTPUT].setChannels(numChannels);
+		outputs[SEND2_OUTPUT].setChannels(numChannels);
+		outputs[OUT_OUTPUT].setChannels(numChannels);
+		int switchVal = params[SWITCH_PARAM].getValue();
 		for (int i = 0; i < numChannels; i++)
 		{
 			if(switchVal < 1) {
 				outputs[SEND1_OUTPUT].setVoltage(inputs[IN_INPUT].getVoltage(i), i);
 				outputs[SEND2_OUTPUT].setVoltage(inputs[RET1_INPUT].getVoltage(i), i);
 				outputs[OUT_OUTPUT].setVoltage(inputs[RET2_INPUT].getVoltage(i), i);
+				lights[0].value = 0;
 			} else {
 				outputs[SEND2_OUTPUT].setVoltage(inputs[IN_INPUT].getVoltage(i), i);
 				outputs[SEND1_OUTPUT].setVoltage(inputs[RET2_INPUT].getVoltage(i), i);
 				outputs[OUT_OUTPUT].setVoltage(inputs[RET1_INPUT].getVoltage(i), i);
+
+				lights[0].value = .9;
 			}
 		}
 
@@ -73,6 +80,7 @@ struct SimplerouterWidget : ModuleWidget {
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
+		addChild(createLightCentered<MediumLight<WhiteLight>>(mm2px(Vec(51.46, 80.693)), module, Simplerouter::SWITCH_LIGHT));
 		addParam(createParamCentered<VCVLatch>(mm2px(Vec(51.46, 64.693)), module, Simplerouter::SWITCH_PARAM));
 
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(21.319, 38.412)), module, Simplerouter::IN_INPUT));
