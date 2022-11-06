@@ -267,7 +267,7 @@ struct Chordscalequantizer : Module
 		note = std::modf(in, &oct);
 		// this needs to be a float otherwise it'll round to 0
 		float closestDistance = 100.0;
-		int closestIdx = -1;
+		int closestIdx = 0;
 		for (int n = 0; n < 7; n++)
 		{
 			float scalenote = ((float)scale[n]) / 12.0;
